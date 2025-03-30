@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Loading from "react-loading";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -21,35 +22,41 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-
-
-//   const [value, handleChange] = useFormDy({
-//     name: "",
-//     email: "",
-//     password: "",
-//     cPassword: "",
-//   });
+  //   const [value, handleChange] = useFormDy({
+  //     name: "",
+  //     email: "",
+  //     password: "",
+  //     cPassword: "",
+  //   });
   const [showPassword, setShowPassword] = useState(false);
-    const [catchErro, setCatchErro] = useState();
-
+  const [catchErro, setCatchErro] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-//   const password = watch('password')
-//   console.log(password);
-  
+  //   const password = watch('password')
+  //   console.log(password);
+
   const navigate = useNavigate();
   const onSubmit = async (fromData) => {
+    if (isLoading) return;
+    setIsLoading(true)
     try {
       const data = await registerUser({ ...fromData });
+      setIsLoading(false)
       navigate("/login?reg=succuss");
     } catch (error) {
-        setCatchErro(()=>error?.response?.data ? error?.response?.data : 'Somthing Wrong Please try agin')
+      setCatchErro(() =>
+        error?.response?.data
+          ? error?.response?.data
+          : "Somthing Wrong Please try agin"
+      );
+      setIsLoading(false)
       console.error("Error:", error.response ? error.response.data : error);
     }
   };
@@ -69,54 +76,65 @@ function Register() {
                   {...register("name")}
                   type="text"
                   name="name"
-                //   value={value.name}
-                //   onChange={handleChange}
+                  //   value={value.name}
+                  //   onChange={handleChange}
                 />
                 <label>Name</label>
-                {errors.name&& <p className="error">{errors.name?.message}</p>}
+                {errors.name && <p className="error">{errors.name?.message}</p>}
               </div>
               <div className="input-box">
                 <span className="icon">
                   <i className="bx bx-envelope" />
                 </span>
                 <input
-                {...register("email")}
+                  {...register("email")}
                   name="email"
                   type="text"
-                //   value={value.email}
-                //   onChange={handleChange}
+                  //   value={value.email}
+                  //   onChange={handleChange}
                 />
                 <label>Email</label>
-                {errors.email&& <p className="error">{errors.email?.message}</p>}
+                {errors.email && (
+                  <p className="error">{errors.email?.message}</p>
+                )}
               </div>
               <div className="input-box">
                 <span className="icon">
                   <i className="bx bx-lock-alt"></i>
                 </span>
                 <input
-                {...register("password")}
+                  {...register("password")}
                   name="password"
                   type={showPassword ? "text" : "password"}
-                //   value={value.password}
-                //   onChange={handleChange}
+                  //   value={value.password}
+                  //   onChange={handleChange}
                 />
                 <label>Password</label>
-                {errors.password&& <p className="error">{errors.password?.message}</p>}
+                {errors.password && (
+                  <p className="error">{errors.password?.message}</p>
+                )}
               </div>
               {/* confirm password */}
               <div className="input-box">
-              <span className="icon" onClick={() => setShowPassword(!showPassword)}>
-                <i className={`bx ${showPassword ? "bxs-hide" : "bxs-show"}`} />
-              </span>
+                <span
+                  className="icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <i
+                    className={`bx ${showPassword ? "bxs-hide" : "bxs-show"}`}
+                  />
+                </span>
                 <input
-                {...register("cPassword")}
+                  {...register("cPassword")}
                   name="cPassword"
                   type={showPassword ? "text" : "password"}
-                //   value={value.cPassword}
-                //   onChange={handleChange}
+                  //   value={value.cPassword}
+                  //   onChange={handleChange}
                 />
                 <label>Confirm Password</label>
-                {errors.cPassword&& <p className="error">{errors.cPassword?.message}</p>}
+                {errors.cPassword && (
+                  <p className="error">{errors.cPassword?.message}</p>
+                )}
               </div>
               <div className="remember-forgot">
                 <label>
@@ -125,9 +143,19 @@ function Register() {
                 </label>
               </div>
               <button type="submit" className="btn">
-                Register
+                {isLoading ? (
+                  <div className="d-flex justify-content-center align-items-center text-center">
+                    <Loading type="bars" color="#fff" height={35} width={35} />
+                  </div>
+                ) : (
+                  "Register"
+                )}
               </button>
-              {catchErro?.message && <p className="error text-center mt-2 mb-0 font-weight-bold">{catchErro.message}</p>}
+              {catchErro?.message && (
+                <p className="error text-center mt-2 mb-0 font-weight-bold">
+                  {catchErro.message}
+                </p>
+              )}
               <div className="login-register">
                 <p>
                   Already have an account?
