@@ -2,6 +2,7 @@
   "name": "flpycart",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://midlj.github.io/ecommers",
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
     "@reduxjs/toolkit": "^2.6.1",
@@ -26,7 +27,6 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "homepage": "https://midlj.github.io/ecommers",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
