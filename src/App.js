@@ -7,6 +7,7 @@ import store from "./store/store";
 import AuthWatcher from "./components/AuthWatcher";
 
 const App = () => {
+
   return (
     <>
       <Provider store={store}>

@@ -10,7 +10,8 @@ const RoutesComponent = () => {
   const  isAuthenticated  = useSelector((state) => state.auth.token);
 
   return (
-    <Router basename="/ecommers">
+    // <Router basename="/ecommers">
+    <Router>
       <Routes>
         {/* Public Routes (Accessible only if NOT logged in) */}
         <Route path="/" element={!isAuthenticated ? <Login /> : <Navigate to="/home" />} />
