@@ -22,8 +22,8 @@ const RoutesComponent = () => {
         <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/home" />} />
 
         {/* Private Routes (Accessible only if LOGGED IN) */}
-        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
-        <Route path="/cart" element={isAuthenticated ? <CartComponent /> : <Navigate to="/login" />} />
+        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/" />} />
+        <Route path="/cart" element={isAuthenticated ? <CartComponent /> : <Navigate to="/" />} />
 
         {/* Catch-all: Redirect to Home if route not found */}
         <Route path="*" element={<Navigate to="/" />} />
