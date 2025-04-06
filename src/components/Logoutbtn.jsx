@@ -3,11 +3,15 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { logoutUser } from "../services/authService";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Logoutbtn() {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
     const username =  useSelector((state) => state.auth.username);
   const handleLogout = async () => {
+    navigate('/home')
     try {
       const data = await logoutUser(username);
       dispatch(logout());
