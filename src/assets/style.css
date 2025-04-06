@@ -5,14 +5,14 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
 }
-.error{
+.error {
   color: tomato;
   padding-bottom: 5px;
 }
 .input-container {
   display: flex;
   align-items: center;
-min-height: 100dvh;
+  min-height: 100dvh;
   .wrapper {
     position: relative;
     width: 400px;
@@ -46,7 +46,6 @@ min-height: 100dvh;
     font-weight: 500;
     pointer-events: none;
     transition: 0.5s;
-    
   }
   .input-box input:focus ~ label,
   .input-box input:valid ~ label {
@@ -92,7 +91,7 @@ min-height: 100dvh;
     text-decoration: underline;
   }
 
-  .btn:active{
+  .btn:active {
     outline: solid 2px #212121;
   }
   .btn {
@@ -109,9 +108,8 @@ min-height: 100dvh;
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-variation-settings:
-      "wdth" 100;
-      font-weight: 500;
+    font-variation-settings: "wdth" 100;
+    font-weight: 500;
   }
 
   .login-register {
@@ -148,8 +146,44 @@ min-height: 100dvh;
     z-index: 1;
   }
 }
+
+.header_section {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.header_section .menu-btn i {
+  font-size: 24px;
+}
+.header_section .right-menu-btn i {
+  font-size: 27px;
+}
+.cart-btn,.profile-btn,.menu-btn{
+cursor: pointer;
+color: #000;
+}
+.header_section .cart-btn {
+  position: relative;
+}
+.cart-count {
+  position: absolute;
+  min-width: 16px;
+  height: 18px;
+  display: inline-flex;
+  background-color: #c90000;
+  color: #fff;
+  font-size: 14px;
+  top: -6px;
+  right: -6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  font-family: serif;
+}
 @media screen and (max-width: 480px) {
-    .input-container .wrapper {
-        padding: 25px;
-    }
+  .input-container .wrapper {
+    padding: 25px;
   }
+}
